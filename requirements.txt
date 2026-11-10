@@ -1,0 +1,23 @@
+# --- Web framework -----------------------------------------------------
+Flask
+Werkzeug
+gunicorn
+
+# --- Image processing ---------------------------------------------------
+Pillow
+opencv-python-headless
+numpy>=2.0.0
+
+# --- Deep learning / AI inpainting ---------------------------------------
+torch
+torchvision
+simple-lama-inpainting
+
+# Optional: Stable Diffusion XL Inpainting backend (INPAINT_BACKEND=sdxl)
+# diffusers
+# transformers
+# accelerate
+# safetensors
+
+# --- Utilities -------------------------------------------------------------
+python-dotenv

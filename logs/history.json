@@ -1,0 +1,159 @@
+[
+  {
+    "id": "hist_1794343013782",
+    "timestamp": 1794343013.782897,
+    "formatted_time": "Nov 11, 2026 02:36 AM",
+    "action": "natural_language_remove",
+    "original_filename": "b3d64124fbd9_Gemini_Generated_Image_pohsibpohsibpohs.png",
+    "result_filename": "dd6ec9f91148_result.png",
+    "original_url": "/static/uploads/b3d64124fbd9_Gemini_Generated_Image_pohsibpohsibpohs.png",
+    "result_url": "/static/results/dd6ec9f91148_result.png",
+    "elapsed_seconds": 7.4,
+    "metadata": {
+      "prompt": "remove the background",
+      "matched_labels": [
+        "clock"
+      ],
+      "boxes_count": 1,
+      "detected_count": 1
+    }
+  },
+  {
+    "id": "hist_1794342204680",
+    "timestamp": 1794342204.6807969,
+    "formatted_time": "Nov 11, 2026 02:23 AM",
+    "action": "remove_background",
+    "original_filename": "1e1d9c52baf9_ChatGPT_Image_Aug_26_2026_10_33_01_AM-Photoroom.png",
+    "result_filename": "d9bd3232d2f0_nobg_1e1d9c52baf9_ChatGPT_Image_Aug_26_2026_10_33_01_AM-Photoroom.png",
+    "original_url": "/static/uploads/1e1d9c52baf9_ChatGPT_Image_Aug_26_2026_10_33_01_AM-Photoroom.png",
+    "result_url": "/static/results/d9bd3232d2f0_nobg_1e1d9c52baf9_ChatGPT_Image_Aug_26_2026_10_33_01_AM-Photoroom.png",
+    "elapsed_seconds": 115.2,
+    "metadata": {}
+  },
+  {
+    "id": "hist_1794341937146",
+    "timestamp": 1794341937.1468797,
+    "formatted_time": "Nov 11, 2026 02:18 AM",
+    "action": "remove_object",
+    "original_filename": "fce2b6955c1d_result.png",
+    "result_filename": "3de16d36b468_result.png",
+    "original_url": "/static/uploads/fce2b6955c1d_result.png",
+    "result_url": "/static/results/3de16d36b468_result.png",
+    "elapsed_seconds": 2.27,
+    "metadata": {}
+  },
+  {
+    "id": "hist_1794341931718",
+    "timestamp": 1794341931.718497,
+    "formatted_time": "Nov 11, 2026 02:18 AM",
+    "action": "remove_object",
+    "original_filename": "1b871cafef9d_result.png",
+    "result_filename": "fce2b6955c1d_result.png",
+    "original_url": "/static/uploads/1b871cafef9d_result.png",
+    "result_url": "/static/results/fce2b6955c1d_result.png",
+    "elapsed_seconds": 2.69,
+    "metadata": {}
+  },
+  {
+    "id": "hist_1794341918985",
+    "timestamp": 1794341918.9857948,
+    "formatted_time": "Nov 11, 2026 02:18 AM",
+    "action": "remove_object",
+    "original_filename": "a3cd98f1639c_result.png",
+    "result_filename": "1b871cafef9d_result.png",
+    "original_url": "/static/uploads/a3cd98f1639c_result.png",
+    "result_url": "/static/results/1b871cafef9d_result.png",
+    "elapsed_seconds": 2.72,
+    "metadata": {}
+  },
+  {
+    "id": "hist_1794341910397",
+    "timestamp": 1794341910.397906,
+    "formatted_time": "Nov 11, 2026 02:18 AM",
+    "action": "remove_object",
+    "original_filename": "d9ad6386870d_Mahfujul_Haque_Research_Wing_Poster.png",
+    "result_filename": "a3cd98f1639c_result.png",
+    "original_url": "/static/uploads/d9ad6386870d_Mahfujul_Haque_Research_Wing_Poster.png",
+    "result_url": "/static/results/a3cd98f1639c_result.png",
+    "elapsed_seconds": 2.66,
+    "metadata": {}
+  },
+  {
+    "id": "hist_1794341864173",
+    "timestamp": 1794341864.1733701,
+    "formatted_time": "Nov 11, 2026 02:17 AM",
+    "action": "natural_language_remove",
+    "original_filename": "826025dca98e_95645685-807a-4f4d-b401-57ca73b78422.jpg",
+    "result_filename": "de8edbe08dd4_result.png",
+    "original_url": "/static/uploads/826025dca98e_95645685-807a-4f4d-b401-57ca73b78422.jpg",
+    "result_url": "/static/results/de8edbe08dd4_result.png",
+    "elapsed_seconds": 22.23,
+    "metadata": {
+      "prompt": "remove the black ring from the finger of the person in the left.",
+      "matched_labels": [
+        "person"
+      ],
+      "boxes_count": 1,
+      "detected_count": 6
+    }
+  },
+  {
+    "id": "hist_1794337457485",
+    "timestamp": 1794337457.4851675,
+    "formatted_time": "Nov 11, 2026 01:04 AM",
+    "action": "enhance_image",
+    "original_filename": "test_camera.png",
+    "result_filename": "822df6d721cc_enhanced_2x_test_camera.png",
+    "original_url": "/static/uploads/test_camera.png",
+    "result_url": "/static/results/822df6d721cc_enhanced_2x_test_camera.png",
+    "elapsed_seconds": 1.17,
+    "metadata": {
+      "scale": 2
+    }
+  },
+  {
+    "id": "hist_1794332412128",
+    "timestamp": 1794332412.1282692,
+    "formatted_time": "Nov 10, 2026 11:40 PM",
+    "action": "natural_language_remove",
+    "original_filename": "test_camera.png",
+    "result_filename": "20574db59e4b_result.png",
+    "original_url": "/static/uploads/test_camera.png",
+    "result_url": "/static/results/20574db59e4b_result.png",
+    "elapsed_seconds": 17.03,
+    "metadata": {
+      "prompt": "remove the vase",
+      "matched_labels": [
+        "dining table"
+      ],
+      "boxes_count": 1,
+      "detected_count": 4
+    }
+  },
+  {
+    "id": "hist_1794332124727",
+    "timestamp": 1794332124.7271316,
+    "formatted_time": "Nov 10, 2026 11:35 PM",
+    "action": "detect_objects",
+    "original_filename": "test_camera.png",
+    "result_filename": "test_camera.png",
+    "original_url": "/static/uploads/test_camera.png",
+    "result_url": "/static/uploads/test_camera.png",
+    "elapsed_seconds": 18.38,
+    "metadata": {
+      "count": 5
+    }
+  },
+  {
+    "id": "hist_1794329613911",
+    "timestamp": 1794329613.9112275,
+    "formatted_time": "Nov 10, 2026 10:53 PM",
+    "action": "remove_background",
+    "original_filename": "test_sneakers.png",
+    "result_filename": "36719ba5c782_nobg_test_sneakers.png",
+    "original_url": "/static/uploads/test_sneakers.png",
+    "result_url": "/static/results/36719ba5c782_nobg_test_sneakers.png",
+    "elapsed_seconds": 232.38,
+    "metadata": {}
+  }
+]

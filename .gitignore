@@ -1,0 +1,26 @@
+# Environment
+.env
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Model weights / cache
+model_cache/
+*.ckpt
+*.pth
+*.safetensors
+
+# Uploaded / generated media (keep folders, ignore contents)
+static/uploads/*
+!static/uploads/.gitkeep
+static/results/*
+!static/results/.gitkeep
+
+# Logs
+logs/*.log
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
