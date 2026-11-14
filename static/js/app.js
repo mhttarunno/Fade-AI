@@ -131,6 +131,8 @@
         statsModal: document.getElementById("statsModal"),
         historyDrawerBtn: document.getElementById("historyDrawerBtn"),
         historyListContainer: document.getElementById("historyListContainer"),
+        clearHistoryBtn: document.getElementById("clearHistoryBtn"),
+        historyCountBadge: document.getElementById("historyCountBadge"),
     };
 
     // ---------------------------------------------------------------------
@@ -1517,6 +1519,51 @@
                 }
             });
         }
+
+        // Clear All History Button
+        if (el.clearHistoryBtn) {
+            el.clearHistoryBtn.addEventListener("click", async () => {
+                const confirmed = window.confirm("Are you sure you want to clear your entire editing history? This cannot be undone.");
+                if (!confirmed) return;
+
+                try {
+                    el.clearHistoryBtn.disabled = true;
+                    const res = await fetch("/api/history/clear", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" }
+                    });
+                    const data = await res.json();
+                    if (!res.ok || !data.success) {
+                        throw new Error(data.error || "Failed to clear history.");
+                    }
+
+                    renderEmptyHistory();
+                    showAlert("Editing history cleared successfully.", "success", 4000);
+                } catch (err) {
+                    console.error("Clear history error:", err);
+                    showAlert(err.message || "Failed to clear history.");
+                } finally {
+                    if (el.clearHistoryBtn) el.clearHistoryBtn.disabled = true;
+                }
+            });
+        }
+    }
+
+    function renderEmptyHistory() {
+        if (el.historyListContainer) {
+            el.historyListContainer.innerHTML = `
+                <div class="text-center py-5 text-muted small">
+                    <i class="bi bi-inbox fs-2 d-block mb-2 text-secondary"></i>
+                    No edit history recorded yet. Upload an image to start!
+                </div>
+            `;
+        }
+        if (el.historyCountBadge) {
+            el.historyCountBadge.textContent = "0 items";
+        }
+        if (el.clearHistoryBtn) {
+            el.clearHistoryBtn.disabled = true;
+        }
     }
 
     async function loadUsageStats() {
@@ -1553,13 +1600,15 @@
             const res = await fetch("/api/history?limit=25");
             const data = await res.json();
             if (!data.success || !data.history.length) {
-                el.historyListContainer.innerHTML = `
-                    <div class="text-center py-5 text-muted small">
-                        <i class="bi bi-inbox fs-2 d-block mb-2 text-secondary"></i>
-                        No edit history recorded yet.
-                    </div>
-                `;
+                renderEmptyHistory();
                 return;
+            }
+
+            if (el.historyCountBadge) {
+                el.historyCountBadge.textContent = `${data.history.length} items`;
+            }
+            if (el.clearHistoryBtn) {
+                el.clearHistoryBtn.disabled = false;
             }
 
             el.historyListContainer.innerHTML = "";
@@ -1574,13 +1623,16 @@
                             <span class="text-muted extra-small" style="font-size: 0.72rem;">${item.formatted_time || ''}</span>
                         </div>
                     </div>
-                    <div class="d-flex gap-1">
+                    <div class="d-flex gap-1 align-items-center">
                         <button class="btn btn-sm btn-outline-primary rounded-pill px-2 py-1 restore-history-btn" title="Reopen in Studio">
                             <i class="bi bi-pencil"></i>
                         </button>
                         <a href="${item.result_url}" download="${item.result_filename}" class="btn btn-sm btn-outline-secondary rounded-pill px-2 py-1" title="Download">
                             <i class="bi bi-download"></i>
                         </a>
+                        <button class="btn btn-sm btn-outline-danger rounded-pill px-2 py-1 delete-history-btn" title="Delete from history">
+                            <i class="bi bi-trash3"></i>
+                        </button>
                     </div>
                 `;
 
@@ -1601,6 +1653,43 @@
                         await initEditor(item.result_url);
                         showSection("editor");
                         setLoading(false);
+                    });
+                }
+
+                const deleteBtn = card.querySelector(".delete-history-btn");
+                if (deleteBtn) {
+                    deleteBtn.addEventListener("click", async (e) => {
+                        e.stopPropagation();
+                        try {
+                            deleteBtn.disabled = true;
+                            const delRes = await fetch("/api/history/delete", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ id: item.id })
+                            });
+                            const delData = await delRes.json();
+                            if (!delRes.ok || !delData.success) {
+                                throw new Error(delData.error || "Failed to delete item.");
+                            }
+
+                            card.style.transition = "all 0.25s ease";
+                            card.style.opacity = "0";
+                            card.style.transform = "translateX(20px)";
+                            setTimeout(() => {
+                                card.remove();
+                                const remainingCards = el.historyListContainer.querySelectorAll(".history-item-card");
+                                if (el.historyCountBadge) {
+                                    el.historyCountBadge.textContent = `${remainingCards.length} items`;
+                                }
+                                if (remainingCards.length === 0) {
+                                    renderEmptyHistory();
+                                }
+                            }, 250);
+                        } catch (err) {
+                            console.error("Delete history error:", err);
+                            showAlert(err.message || "Could not delete history item.");
+                            deleteBtn.disabled = false;
+                        }
                     });
                 }
 

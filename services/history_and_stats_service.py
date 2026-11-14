@@ -25,7 +25,6 @@ DEFAULT_STATS = {
     "objects_removed": 0,
     "backgrounds_removed": 0,
     "objects_detected": 0,
-    "objects_replaced": 0,
     "images_enhanced": 0,
     "batch_processed": 0,
     "total_processing_seconds": 0.0,
@@ -124,6 +123,34 @@ def get_history(limit: int = 20) -> List[Dict[str, Any]]:
         except Exception as exc:
             logger.error("Failed to read history: %s", exc)
             return []
+
+
+def clear_history() -> bool:
+    """Clears all entries from the persistent edit history."""
+    with _LOCK:
+        _ensure_files()
+        try:
+            _HISTORY_FILE.write_text("[]", encoding="utf-8")
+            logger.info("Edit history cleared successfully.")
+            return True
+        except Exception as exc:
+            logger.error("Failed to clear history: %s", exc)
+            return False
+
+
+def delete_history_item(item_id: str) -> bool:
+    """Removes a single history record by its ID."""
+    with _LOCK:
+        _ensure_files()
+        try:
+            items: List[Dict[str, Any]] = json.loads(_HISTORY_FILE.read_text(encoding="utf-8"))
+            filtered = [item for item in items if str(item.get("id")) != str(item_id)]
+            _HISTORY_FILE.write_text(json.dumps(filtered, indent=2), encoding="utf-8")
+            logger.info("Deleted history item %s", item_id)
+            return True
+        except Exception as exc:
+            logger.error("Failed to delete history item %s: %s", item_id, exc)
+            return False
 
 
 def get_stats() -> Dict[str, Any]:

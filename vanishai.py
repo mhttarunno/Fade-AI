@@ -13,6 +13,8 @@ Routes:
     POST /api/batch-process           -> batch multi-image processing & zip creation
     GET  /api/history                 -> recent editing history
     POST /api/history/save            -> save history item
+    POST /api/history/clear           -> clear all editing history
+    POST /api/history/delete          -> delete single history item
     GET  /api/stats                   -> usage dashboard metrics
     GET  /api/download/<f>            -> download result / zip file
     GET  /api/health                  -> readiness & device health check
@@ -42,7 +44,13 @@ from services.background_service import remove_background
 from services.batch_service import create_batch_zip
 from services.detection_service import detect_objects
 from services.enhancement_service import enhance_image
-from services.history_and_stats_service import get_history, get_stats, record_action
+from services.history_and_stats_service import (
+    clear_history,
+    delete_history_item,
+    get_history,
+    get_stats,
+    record_action,
+)
 from services.inpainting_service import InpaintingService
 from utils.file_utils import cleanup_old_files, save_upload
 from utils.logger import get_logger
@@ -375,6 +383,34 @@ def create_app(env: str = None) -> Flask:
         meta = payload.get("metadata", {})
         entry = record_action(action, orig, res, 0.0, meta)
         return jsonify({"success": True, "entry": entry})
+
+    @app.route("/api/history/clear", methods=["POST"])
+    def clear_history_route():
+        """Clear all entries from the editing history."""
+        try:
+            success = clear_history()
+            if success:
+                return jsonify({"success": True, "message": "History cleared successfully."})
+            return jsonify({"success": False, "error": "Failed to clear history."}), 500
+        except Exception as exc:
+            logger.error("Failed to clear history: %s", exc)
+            return jsonify({"success": False, "error": str(exc)}), 500
+
+    @app.route("/api/history/delete", methods=["POST"])
+    def delete_history_item_route():
+        """Delete a single item from the editing history."""
+        try:
+            payload = request.get_json(silent=True) or {}
+            item_id = payload.get("id")
+            if not item_id:
+                return jsonify({"success": False, "error": "Item ID is required."}), 400
+            success = delete_history_item(item_id)
+            if success:
+                return jsonify({"success": True, "message": "Item deleted from history."})
+            return jsonify({"success": False, "error": "Failed to delete history item."}), 500
+        except Exception as exc:
+            logger.error("Failed to delete history item: %s", exc)
+            return jsonify({"success": False, "error": str(exc)}), 500
 
     @app.route("/api/stats", methods=["GET"])
     def get_stats_route():

@@ -1177,6 +1177,22 @@ body.vanish-app-body {
 /* -------------------------------------------------------------------------
    Accessibility & Responsive
    ------------------------------------------------------------------------- */
+/* Custom Pill Select for Batch Mode */
+#batchOperationSelect {
+    padding-left: 1.15rem !important;
+    padding-right: 2.75rem !important;
+    background-position: right 1rem center !important;
+    font-weight: 500;
+    line-height: 1.5;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+}
+
+#batchOperationSelect:focus {
+    border-color: var(--brand-indigo);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
 @media (max-width: 768px) {
     .main-dock {
         flex-wrap: wrap;

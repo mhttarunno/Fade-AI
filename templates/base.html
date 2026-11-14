@@ -227,15 +227,24 @@
     </div>
 
     <!-- Edit History Drawer / Offcanvas -->
-    <div class="offcanvas offcanvas-end rounded-start-4 glass-card border-0 shadow-2xl" tabindex="-1" id="historyDrawer" aria-labelledby="historyDrawerLabel" style="width: min(450px, 92vw);">
-        <div class="offcanvas-header border-bottom pb-3">
-            <h5 class="offcanvas-title fw-bold d-flex align-items-center gap-2" id="historyDrawerLabel">
+    <div class="offcanvas offcanvas-end rounded-start-4 glass-card border-0 shadow-2xl" tabindex="-1" id="historyDrawer" aria-labelledby="historyDrawerLabel" style="width: min(460px, 94vw);">
+        <div class="offcanvas-header border-bottom pb-3 d-flex align-items-center justify-content-between">
+            <h5 class="offcanvas-title fw-bold d-flex align-items-center gap-2 mb-0" id="historyDrawerLabel">
                 <i class="bi bi-clock-history text-warning"></i> Recent Edit History
             </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <div class="d-flex align-items-center gap-2">
+                <button type="button" class="btn btn-sm btn-outline-danger rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1" id="clearHistoryBtn" title="Clear all editing history">
+                    <i class="bi bi-trash3"></i>
+                    <span class="small fw-semibold">Clear History</span>
+                </button>
+                <button type="button" class="btn-close ms-1" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
         </div>
         <div class="offcanvas-body p-3">
-            <p class="text-secondary small mb-3">Reopen previous results or restore an earlier version to the canvas.</p>
+            <div class="d-flex align-items-center justify-content-between mb-3 text-secondary small">
+                <span>Reopen previous projects or download prior results.</span>
+                <span id="historyCountBadge" class="badge bg-secondary-subtle text-secondary rounded-pill px-2 py-1 small">0 items</span>
+            </div>
             <div id="historyListContainer" class="d-flex flex-column gap-2">
                 <div class="text-center py-5 text-muted small">
                     <i class="bi bi-inbox fs-2 d-block mb-2 text-secondary"></i>
